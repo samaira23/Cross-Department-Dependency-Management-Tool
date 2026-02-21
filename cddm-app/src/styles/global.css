@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-dark: #1a1a1e;
+  --bg-mid: #242428;
+  --bg-panel: #2e2e34;
+  --bg-card: #38383f;
+  --accent: #6c8ebf;
+  --accent-blue: #4a90d9;
+  --accent-bright: #5ba3f5;
+  --text-primary: #e8e8ed;
+  --text-secondary: #9999a8;
+  --text-muted: #6a6a7a;
+  --border: #3f3f4a;
+  --border-light: #4f4f5e;
+  --success: #5bb87a;
+  --danger: #d9534f;
+  --white: #ffffff;
+  --sidebar-width: 220px;
+}
+
+html, body, #root, .app {
+  height: 100%;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 65px;
+  background: var(--bg-mid);
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-brand {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: black;
+  text-transform: uppercase;
+}
+
+.navbar-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-link {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: black;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+}
+
+.nav-link:hover {
+  color: red;
+}
+
+.nav-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.nav-avatar svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-secondary);
+}
+
+/* BUTTONS */
+.btn {
+  padding: 7px 16px;
+  border-radius: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: var(--accent-blue);
+  color: #fff;
+  border-color: var(--accent-blue);
+}
+
+.btn-primary:hover {
+  background: var(--accent-bright);
+  border-color: var(--accent-bright);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.btn-danger:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-save {
+  background: var(--success);
+  color: #fff;
+  border-color: var(--success);
+}
+
+.btn-sm {
+  padding: 4px 10px;
+  font-size: 11px;
+}
+
+/* FORM FIELDS */
+.form-field {
+  width: 100%;
+  padding: 9px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-field:focus {
+  border-color: var(--accent-blue);
+}
+
+.form-field::placeholder {
+  color: var(--text-muted);
+}
+
+select.form-field {
+  appearance: none;
+  cursor: pointer;
+}
