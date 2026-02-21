@@ -352,10 +352,30 @@ export default function AdminDashboard({ user, data, setData, onLogout, onGraphV
 
         </aside>
 
-        <main className="admin-main">
-          {renderDetail()}
-        
-        </main>
+<main className="admin-main">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      opacity: 0.3,
+      pointerEvents: "none",
+      zIndex: 0,
+    }}
+  >
+    <defs>
+      <pattern id="admin-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+        <circle cx="1" cy="1" r="1.0" fill="#363434" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#admin-dots)" />
+  </svg>
+
+  {renderDetail()}
+</main>
       </div>
     </div>
   );

@@ -13,7 +13,7 @@
 
 /* SIDEBAR */
 .graph-sidebar {
-  width: 200px;
+  width: 300px;
   background: var(--bg-mid);
   border-right: 1px solid var(--border);
   display: flex;
@@ -86,7 +86,7 @@
 .graph-canvas-area {
   flex: 1;
   position: relative;
-  background: var(--bg-dark);
+  background: white;
   overflow: hidden;
 }
 

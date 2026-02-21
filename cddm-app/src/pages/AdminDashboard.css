@@ -128,10 +128,6 @@
   /* rest of your existing styles stay the same */
 }
 
-.admin-main {
-  position: relative;
-  overflow: hidden;
-}
 
 .admin-main::before {
   content: "";
@@ -154,12 +150,13 @@
   flex: 1;
   padding: 100px;
   overflow-y: auto;
-  background: var(--bg-dark);
   background-color: #f7f1f1;
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  position: relative;
 }
+
 
 .detail-empty {
   margin-top: 60px;

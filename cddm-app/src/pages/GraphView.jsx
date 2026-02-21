@@ -66,10 +66,10 @@ export default function GraphView({ user, data, onLogout, onBack }) {
 
   const getDeptColor = (taskId) => {
     const task = data.tasks.find((t) => t.id === taskId);
-    if (!task) return "#5a5a6a";
+    if (!task) return "#77777a";
     const deptIndex = data.departments.findIndex((d) => d.id === task.department);
     const colors = ["#4a90d9", "#5bb87a", "#d9924a", "#9b59b6", "#e74c3c", "#1abc9c"];
-    return colors[deptIndex % colors.length] || "#5a5a6a";
+    return colors[deptIndex % colors.length] || "#fbfbff";
   };
 
   const getLinkColor = (link) => {
@@ -196,7 +196,7 @@ export default function GraphView({ user, data, onLogout, onBack }) {
           >
             <defs>
               <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
-                <circle cx="1" cy="1" r="0.8" fill="#3a3a48" />
+                <circle cx="1" cy="1" r="0.8" fill="#919197" />
               </pattern>
               {/* Arrowhead markers per link type */}
               {["blocks", "requires", "related"].map((type) => (
@@ -276,7 +276,7 @@ export default function GraphView({ user, data, onLogout, onBack }) {
 
                   <circle
                     r="24"
-                    fill={isSelected ? color : "#2e2e38"}
+                    fill={isSelected ? color : "#5f5f61"}
                     stroke={color}
                     strokeWidth={isSelected ? 0 : isConnected ? 2 : 1.5}
                     opacity={selected && !isSelected && !isConnected ? 0.4 : 1}
@@ -304,7 +304,7 @@ export default function GraphView({ user, data, onLogout, onBack }) {
                       textAnchor="middle"
                       dominantBaseline="middle"
                       y={8}
-                      fill={isSelected ? "rgba(255,255,255,0.7)" : "var(--text-muted)"}
+                      fill="rgba(255, 255, 255)"
                       fontSize="7"
                       fontFamily="DM Sans, sans-serif"
                       style={{ userSelect: "none", pointerEvents: "none" }}
