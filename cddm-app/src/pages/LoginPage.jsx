@@ -35,6 +35,10 @@ export default function LoginPage({ onLogin }) {
 		}
 	};
 
+	const handleForgot = () => {
+		alert("Please contact and admin")
+	}
+
 	return (
 		<div className="login-root">
 			{/* diagonal decorative line */}
@@ -71,7 +75,7 @@ export default function LoginPage({ onLogin }) {
 						</form>
 					</div>
 
-					<p className="login-forgot">Forgot Password?</p>
+					<p className="login-forgot" onClick={handleForgot}>Forgot Password?</p>
 				</div>
 			</div>
 
@@ -86,6 +90,6 @@ export default function LoginPage({ onLogin }) {
 					<p className="login-brand-sub">{import.meta.env.VITE_COMPANY_NAME}</p>
 				</div>
 			</div>
-		</div>
+		</div >
 	);
 }

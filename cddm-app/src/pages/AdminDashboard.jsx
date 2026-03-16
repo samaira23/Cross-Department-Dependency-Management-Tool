@@ -109,6 +109,14 @@ export default function AdminDashboard({ user, data, setData, onLogout, onGraphV
 
 			} else if (selected.type === "dependency") {
 
+				if (!detail.from || !detail.to) {
+					alert("Invalid dependency");
+					return;
+				}
+				if (detail.from === detail.to) {
+					alert("Task cannot depend on itself");
+					return;
+				}
 				await api.post("/api/dependency/create", {
 					from: detail.from,
 					to: detail.to,
@@ -186,7 +194,8 @@ export default function AdminDashboard({ user, data, setData, onLogout, onGraphV
 				dept_id: dept
 			});
 
-			if (res.status === 201) {
+			if (res.data.success) {
+				// Task creation returns 200 instead of 201
 				const newTask = {
 					id: res.data.node_id,
 					name: "New Task",
@@ -198,12 +207,13 @@ export default function AdminDashboard({ user, data, setData, onLogout, onGraphV
 					tasks: [...d.tasks, newTask]
 				}));
 
-				selectItem("task", newTask.id);
-				setEditMode(true);
+				setSelected({ type: "task", id: newTask.id });
 				setDetail({
 					name: newTask.name,
 					department: newTask.department
 				});
+				setEditMode(true);
+
 			}
 		} catch (err) {
 			console.error("Failed to create task", err);
@@ -211,31 +221,36 @@ export default function AdminDashboard({ user, data, setData, onLogout, onGraphV
 		}
 	};
 
-	const addDependency = async () => {
+	const addDependency = () => {
 		if (data.tasks.length < 2) {
 			alert("You need at least 2 tasks to create a dependency.");
 			return;
 		}
 
+		const from = data.tasks[0].id;
+		const to = data.tasks[1].id;
+
 		const newDep = {
 			id: Date.now(),
-			from: data.tasks[0].id,
-			to: data.tasks[1].id,
-			link: "blocks",
+			from,
+			to,
+			link: "blocks"
 		};
 
 		setData((d) => ({
 			...d,
-			dependencies: [...d.dependencies, newDep],
+			dependencies: [...d.dependencies, newDep]
 		}));
 
-		selectItem("dependency", newDep.id);
-		setEditMode(true);
+		setSelected({ type: "dependency", id: newDep.id });
+
 		setDetail({
-			from: newDep.from,
-			to: newDep.to,
-			link: newDep.link,
+			from,
+			to,
+			link: "blocks"
 		});
+
+		setEditMode(true);
 	};
 
 	const addDepartment = async () => {
@@ -356,16 +371,40 @@ export default function AdminDashboard({ user, data, setData, onLogout, onGraphV
 						<div className="detail-field-group">
 							<div className="detail-field-label">From Task</div>
 							{editMode
-								? <select className="form-field" value={detail.from} onChange={(e) => setDetail({ ...detail, from: Number(e.target.value) })}>
-									{data.tasks.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
+								? <select
+									className="form-field"
+									value={detail.from}
+									onChange={(e) =>
+										setDetail({ ...detail, from: Number(e.target.value) })
+									}
+								>
+									{data.tasks.map((t) => (
+										<option key={t.id} value={t.id}>
+											{t.name}
+										</option>
+									))}
 								</select>
 								: <div className="detail-field-value">{getTaskName(detail.from)}</div>}
 						</div>
 						<div className="detail-field-group">
 							<div className="detail-field-label">To Task</div>
 							{editMode
-								? <select className="form-field" value={detail.to} onChange={(e) => setDetail({ ...detail, to: Number(e.target.value) })}>
-									{data.tasks.filter((t) => t.id !== detail.from).map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
+								? <select
+									className="form-field"
+									value={detail.to}
+									onChange={(e) =>
+										setDetail({ ...detail, to: Number(e.target.value) })
+									}
+								>
+									{data.tasks.map((t) => (
+										<option
+											key={t.id}
+											value={t.id}
+											disabled={t.id === detail.from}
+										>
+											{t.name}
+										</option>
+									))}
 								</select>
 								: <div className="detail-field-value">{getTaskName(detail.to)}</div>}
 						</div>
