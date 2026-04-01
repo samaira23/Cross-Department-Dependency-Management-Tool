@@ -14,37 +14,16 @@ services:
       - path: .env
         required: false
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
 
-  # Uncomment when backend service is available
-  # backend:
-  #   build:
-  #     context: ./cddm-api
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "8000:8000"
-  #   environment:
-  #     DEBUG: "false"
-  #   env_file:
-  #     - .env.backend
-  #   depends_on:
-  #     - db
-  #   restart: unless-stopped
-  #
-  # db:
-  #   image: postgres:15-alpine
-  #   environment:
-  #     POSTGRES_DB: ${DB_NAME:-cddm}
-  #     POSTGRES_USER: ${DB_USER:-cddm}
-  #     POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data
-  #   restart: unless-stopped
-  #
-  # volumes:
-  #   postgres_data:
+  backend:
+    build:
+      context: ./cddm-api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: "false"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
